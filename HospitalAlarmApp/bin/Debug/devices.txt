@@ -1,0 +1,3 @@
+P001,IwanFachryan,Ruang001,Bed001,2025-12-21 10:28:58,RYAN,ToNext2
+P002,IwanFachryanZ,Ruang002,Bed002,2025-12-21 11:25:21,RYAN,ToNext2
+P003,IwanFachryan,Ruang003,Bed003,2025-12-21 11:30:51,RYAN,ToNext2

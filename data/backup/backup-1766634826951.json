@@ -1,0 +1,27 @@
+{
+  "device": {
+    "id": "",
+    "mac": "",
+    "ip": "",
+    "status": "disconnected",
+    "lastSeen": null
+  },
+  "patients": [
+    {
+      "id": "TEST-001",
+      "name": "Test Patient",
+      "room": "Test Room",
+      "bed": "Test Bed",
+      "status": "EMERGENCY_TEST",
+      "time": "25/12/2025, 10.53.36"
+    }
+  ],
+  "alarm": {
+    "active": true,
+    "type": "test",
+    "triggeredAt": "2025-12-25T03:53:36.932Z",
+    "triggeredBy": "system_test",
+    "acknowledged": false,
+    "duration": 10000
+  }
+}

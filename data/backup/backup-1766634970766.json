@@ -1,0 +1,27 @@
+{
+  "device": {
+    "id": "ESP8266-TEST",
+    "mac": "AA:BB:CC:DD:EE:FF",
+    "ip": "192.168.18.250",
+    "status": "connected",
+    "lastSeen": "2025-12-25T03:53:48.151Z"
+  },
+  "patients": [
+    {
+      "id": "TEST-001",
+      "name": "Test Patient",
+      "room": "Test Room",
+      "bed": "Test Bed",
+      "status": "EMERGENCY_TEST",
+      "time": "25/12/2025, 10.56.00"
+    }
+  ],
+  "alarm": {
+    "active": true,
+    "type": "test",
+    "triggeredAt": "2025-12-25T03:56:00.746Z",
+    "triggeredBy": "system_test",
+    "acknowledged": false,
+    "duration": 10000
+  }
+}

@@ -1,0 +1,76 @@
+[2025-12-22 16:42:41] AlarmServerController initialized with port 8088
+[2025-12-22 16:42:41] Starting HTTP server on port 8088
+[2025-12-22 16:42:41] Trying prefixes: http://localhost:8088/, http://127.0.0.1:8088/, http://192.168.18.242:8088/, http://172.22.112.1:8088/, http://192.168.1.100:8088/, http://192.168.0.100:8088/, http://10.0.0.100:8088/
+[2025-12-22 16:42:41] Added prefix: http://localhost:8088/
+[2025-12-22 16:42:41] Added prefix: http://127.0.0.1:8088/
+[2025-12-22 16:42:41] Added prefix: http://192.168.18.242:8088/
+[2025-12-22 16:42:41] Added prefix: http://172.22.112.1:8088/
+[2025-12-22 16:42:41] Added prefix: http://192.168.1.100:8088/
+[2025-12-22 16:42:41] Added prefix: http://192.168.0.100:8088/
+[2025-12-22 16:42:41] Added prefix: http://10.0.0.100:8088/
+[2025-12-22 16:42:41] Starting Alarm Server on port 8088...
+[2025-12-22 16:42:41] Error starting server: The format of the specified network name is invalid
+[2025-12-22 16:47:48] Alarm Server Stopped
+[2025-12-22 16:48:01] AlarmServerController initialized with port 8088
+[2025-12-22 16:48:01] Starting HTTP server on port 8088
+[2025-12-22 16:48:01] Trying prefixes: http://localhost:8088/, http://127.0.0.1:8088/, http://192.168.18.242:8088/, http://172.22.112.1:8088/, http://192.168.1.100:8088/, http://192.168.0.100:8088/, http://10.0.0.100:8088/
+[2025-12-22 16:48:01] Added prefix: http://localhost:8088/
+[2025-12-22 16:48:01] Added prefix: http://127.0.0.1:8088/
+[2025-12-22 16:48:01] Added prefix: http://192.168.18.242:8088/
+[2025-12-22 16:48:01] Added prefix: http://172.22.112.1:8088/
+[2025-12-22 16:48:01] Added prefix: http://192.168.1.100:8088/
+[2025-12-22 16:48:01] Added prefix: http://192.168.0.100:8088/
+[2025-12-22 16:48:01] Added prefix: http://10.0.0.100:8088/
+[2025-12-22 16:48:01] Starting Alarm Server on port 8088...
+[2025-12-22 16:48:01] Error starting server: The format of the specified network name is invalid
+[2025-12-22 17:21:23] AlarmServerController initialized with port 8088
+[2025-12-22 17:21:23] Starting HTTP server on port 8088
+[2025-12-22 17:21:23] Trying prefixes: http://localhost:8088/, http://127.0.0.1:8088/, http://192.168.18.242:8088/, http://172.24.16.1:8088/, http://192.168.1.100:8088/, http://192.168.0.100:8088/, http://10.0.0.100:8088/
+[2025-12-22 17:21:23] Added prefix: http://localhost:8088/
+[2025-12-22 17:21:23] Added prefix: http://127.0.0.1:8088/
+[2025-12-22 17:21:23] Added prefix: http://192.168.18.242:8088/
+[2025-12-22 17:21:23] Added prefix: http://172.24.16.1:8088/
+[2025-12-22 17:21:23] Added prefix: http://192.168.1.100:8088/
+[2025-12-22 17:21:23] Added prefix: http://192.168.0.100:8088/
+[2025-12-22 17:21:23] Added prefix: http://10.0.0.100:8088/
+[2025-12-22 17:21:23] Starting Alarm Server on port 8088...
+[2025-12-22 17:21:24] Error starting server: The format of the specified network name is invalid
+[2025-12-22 17:23:24] Alarm Server Stopped
+[2025-12-22 21:35:25] AlarmServerController initialized with port 8088
+[2025-12-22 21:35:25] Starting HTTP server on port 8088
+[2025-12-22 21:35:25] Trying prefixes: http://localhost:8088/, http://127.0.0.1:8088/, http://192.168.18.242:8088/, http://172.24.64.1:8088/, http://192.168.1.100:8088/, http://192.168.0.100:8088/, http://10.0.0.100:8088/
+[2025-12-22 21:35:25] Added prefix: http://localhost:8088/
+[2025-12-22 21:35:25] Added prefix: http://127.0.0.1:8088/
+[2025-12-22 21:35:25] Added prefix: http://192.168.18.242:8088/
+[2025-12-22 21:35:25] Added prefix: http://172.24.64.1:8088/
+[2025-12-22 21:35:25] Added prefix: http://192.168.1.100:8088/
+[2025-12-22 21:35:25] Added prefix: http://192.168.0.100:8088/
+[2025-12-22 21:35:25] Added prefix: http://10.0.0.100:8088/
+[2025-12-22 21:35:25] Starting Alarm Server on port 8088...
+[2025-12-22 21:35:25] Error starting server: The format of the specified network name is invalid
+[2025-12-22 21:38:19] Alarm Server Stopped
+[2025-12-22 21:53:59] AlarmServerController initialized with port 8088
+[2025-12-22 21:53:59] Starting HTTP server on port 8088
+[2025-12-22 21:53:59] Trying prefixes: http://localhost:8088/, http://127.0.0.1:8088/, http://192.168.18.242:8088/, http://172.24.64.1:8088/, http://192.168.1.100:8088/, http://192.168.0.100:8088/, http://10.0.0.100:8088/
+[2025-12-22 21:53:59] Added prefix: http://localhost:8088/
+[2025-12-22 21:53:59] Added prefix: http://127.0.0.1:8088/
+[2025-12-22 21:53:59] Added prefix: http://192.168.18.242:8088/
+[2025-12-22 21:53:59] Added prefix: http://172.24.64.1:8088/
+[2025-12-22 21:53:59] Added prefix: http://192.168.1.100:8088/
+[2025-12-22 21:53:59] Added prefix: http://192.168.0.100:8088/
+[2025-12-22 21:53:59] Added prefix: http://10.0.0.100:8088/
+[2025-12-22 21:53:59] Starting Alarm Server on port 8088...
+[2025-12-22 21:53:59] Error starting server: The format of the specified network name is invalid
+[2025-12-22 22:00:22] Alarm Server Stopped
+[2025-12-22 22:17:34] AlarmServerController initialized with port 8088
+[2025-12-22 22:17:34] Starting HTTP server on port 8088
+[2025-12-22 22:17:34] Trying prefixes: http://localhost:8088/, http://127.0.0.1:8088/, http://192.168.18.242:8088/, http://172.24.64.1:8088/, http://192.168.1.100:8088/, http://192.168.0.100:8088/, http://10.0.0.100:8088/
+[2025-12-22 22:17:34] Added prefix: http://localhost:8088/
+[2025-12-22 22:17:34] Added prefix: http://127.0.0.1:8088/
+[2025-12-22 22:17:34] Added prefix: http://192.168.18.242:8088/
+[2025-12-22 22:17:34] Added prefix: http://172.24.64.1:8088/
+[2025-12-22 22:17:34] Added prefix: http://192.168.1.100:8088/
+[2025-12-22 22:17:34] Added prefix: http://192.168.0.100:8088/
+[2025-12-22 22:17:34] Added prefix: http://10.0.0.100:8088/
+[2025-12-22 22:17:34] Starting Alarm Server on port 8088...
+[2025-12-22 22:17:34] Error starting server: The format of the specified network name is invalid

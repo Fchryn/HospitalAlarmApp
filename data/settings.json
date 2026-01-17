@@ -1,0 +1,6 @@
+{
+  "autoSave": true,
+  "alarmVolume": 100,
+  "alarmTestInterval": 30000,
+  "maxPatients": 50
+}

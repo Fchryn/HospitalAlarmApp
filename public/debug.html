@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Alarm Debug Page</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        button { margin: 5px; padding: 10px; }
+        .log { background: #f0f0f0; padding: 10px; margin: 10px 0; }
+        audio { display: block; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>Alarm System Debug</h1>
+    
+    <div>
+        <button onclick="testFile()">1. Test Alarm File</button>
+        <button onclick="playDirect()">2. Play Direct</button>
+        <button onclick="playWithAudioElement()">3. Play with Audio Element</button>
+        <button onclick="testServer()">4. Test Server</button>
+    </div>
+    
+    <div id="result" class="log"></div>
+    
+    <div id="audioContainer"></div>
+    
+    <script>
+        function log(msg) {
+            document.getElementById('result').innerHTML += msg + '<br>';
+            console.log(msg);
+        }
+        
+        function clearLog() {
+            document.getElementById('result').innerHTML = '';
+        }
+        
+        async function testFile() {
+            clearLog();
+            log('Testing alarm file...');
+            
+            try {
+                const response = await fetch('/api/test-alarm-file');
+                const data = await response.json();
+                log(JSON.stringify(data, null, 2));
+                
+                if (data.exists) {
+                    log('✓ File exists: ' + data.path);
+                    log('✓ Size: ' + data.size + ' bytes');
+                    log('✓ Content-Type: ' + data.contentType);
+                } else {
+                    log('✗ File not found');
+                    log('Available files: ' + (data.alarmFiles || []).join(', '));
+                }
+            } catch (error) {
+                log('✗ Error: ' + error.message);
+            }
+        }
+        
+        function playDirect() {
+            clearLog();
+            log('Playing alarm directly...');
+            
+            const audio = new Audio('/alarm');
+            audio.controls = true;
+            audio.preload = 'auto';
+            
+            audio.addEventListener('loadstart', () => log('loadstart'));
+            audio.addEventListener('loadeddata', () => log('loadeddata'));
+            audio.addEventListener('canplay', () => log('canplay'));
+            audio.addEventListener('play', () => log('play'));
+            audio.addEventListener('error', (e) => {
+                log('✗ Error: ' + audio.error?.code + ' - ' + audio.error?.message);
+            });
+            audio.addEventListener('ended', () => log('ended'));
+            
+            document.getElementById('audioContainer').innerHTML = '';
+            document.getElementById('audioContainer').appendChild(audio);
+            
+            audio.play()
+                .then(() => log('✓ Playing successfully'))
+                .catch(err => log('✗ Play failed: ' + err.message));
+        }
+        
+        function playWithAudioElement() {
+            clearLog();
+            log('Creating audio element...');
+            
+            const audioHTML = `
+                <audio id="debugAudio" controls autoplay loop>
+                    <source src="/alarm" type="audio/wav">
+                    <source src="/alarm" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <p>Try right-click → Save audio as... to download and check</p>
+            `;
+            
+            document.getElementById('audioContainer').innerHTML = audioHTML;
+            
+            const audio = document.getElementById('debugAudio');
+            audio.addEventListener('error', (e) => {
+                log('✗ Audio error: ' + audio.error?.message);
+            });
+            audio.addEventListener('play', () => log('✓ Playing'));
+        }
+        
+        function testServer() {
+            clearLog();
+            log('Testing server connection...');
+            
+            fetch('/api/test')
+                .then(res => res.json())
+                .then(data => {
+                    log('✓ Server is running');
+                    log('Endpoints:');
+                    Object.keys(data.endpoints).forEach(key => {
+                        log('  - ' + key + ': ' + data.endpoints[key]);
+                    });
+                })
+                .catch(err => log('✗ Server error: ' + err.message));
+        }
+        
+        // Auto test on load
+        window.onload = function() {
+            testServer();
+            setTimeout(testFile, 1000);
+        };
+    </script>
+</body>
+</html>

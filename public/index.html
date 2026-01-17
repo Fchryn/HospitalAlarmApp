@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚨 Hospital Emergency Alarm System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        :root {
+            --alarm-red: #ff0000;
+            --alarm-orange: #ff6600;
+            --alarm-yellow: #ffcc00;
+            --status-green: #28a745;
+            --status-blue: #007bff;
+            --dark-bg: #121212;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0c2461 0%, #1e3799 100%);
+            color: #fff;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        
+        .alarm-active {
+            background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%) !important;
+            animation: alarmPulse 1s infinite;
+        }
+        
+        @keyframes alarmPulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .card-header {
+            background: rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            font-weight: 600;
+        }
+        
+        .btn-alarm {
+            background: linear-gradient(135deg, var(--alarm-red), #cc0000);
+            color: white;
+            font-weight: bold;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        
+        .btn-alarm:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+        }
+        
+        .btn-stop {
+            background: linear-gradient(135deg, var(--status-green), #1e7e34);
+            color: white;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .status-connected { background-color: var(--status-green); }
+        .status-disconnected { background-color: #dc3545; }
+        .status-alarm { background-color: var(--alarm-red); animation: blink 1s infinite; }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        .patient-row-emergency {
+            background: linear-gradient(90deg, rgba(255,0,0,0.1) 0%, rgba(255,0,0,0.2) 100%) !important;
+            animation: rowFlash 2s infinite;
+        }
+        
+        @keyframes rowFlash {
+            0%, 100% { background: linear-gradient(90deg, rgba(255,0,0,0.1) 0%, rgba(255,0,0,0.2) 100%); }
+            50% { background: linear-gradient(90deg, rgba(255,0,0,0.2) 0%, rgba(255,0,0,0.3) 100%); }
+        }
+        
+        #soundWave {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 40px;
+        }
+        
+        .sound-bar {
+            width: 3px;
+            height: 20px;
+            background: var(--alarm-red);
+            margin: 0 2px;
+            animation: soundWave 1.2s infinite ease-in-out;
+            border-radius: 2px;
+        }
+        
+        .sound-bar:nth-child(2) { animation-delay: 0.1s; }
+        .sound-bar:nth-child(3) { animation-delay: 0.2s; }
+        .sound-bar:nth-child(4) { animation-delay: 0.3s; }
+        .sound-bar:nth-child(5) { animation-delay: 0.4s; }
+        
+        @keyframes soundWave {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(2.5); }
+        }
+        
+        .overlay-alarm {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 0, 0, 0.9);
+            z-index: 9999;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            animation: overlayPulse 1s infinite;
+        }
+        
+        @keyframes overlayPulse {
+            0% { background: rgba(255, 0, 0, 0.9); }
+            50% { background: rgba(255, 0, 0, 0.7); }
+            100% { background: rgba(255, 0, 0, 0.9); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Emergency Overlay -->
+    <div class="overlay-alarm" id="emergencyOverlay">
+        <div class="text-center">
+            <h1 class="display-1 mb-4"><i class="bi bi-exclamation-triangle-fill"></i></h1>
+            <h1 class="display-3 fw-bold">EMERGENCY ALERT</h1>
+            <h2 class="mb-4">PATIENT REQUIRES IMMEDIATE ATTENTION</h2>
+            <div class="mb-4" id="soundWave">
+                <div class="sound-bar"></div>
+                <div class="sound-bar"></div>
+                <div class="sound-bar"></div>
+                <div class="sound-bar"></div>
+                <div class="sound-bar"></div>
+            </div>
+            <button class="btn btn-lg btn-light" onclick="acknowledgeAlarm()">
+                <i class="bi bi-check-circle"></i> ACKNOWLEDGE & SILENCE ALARM
+            </button>
+            <p class="mt-3">Triggered by: <span id="alarmSource">Unknown</span> | Time: <span id="alarmTime">-</span></p>
+        </div>
+    </div>
+
+    <div class="container-fluid py-4">
+        <!-- Header -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h2 class="mb-0">
+                            <i class="bi bi-heart-pulse"></i> Hospital Emergency Alarm System
+                            <span class="badge bg-danger ms-2" id="alarmBadge" style="display: none;">
+                                <i class="bi bi-bell-fill"></i> ALARM ACTIVE
+                            </span>
+                        </h2>
+                        <div class="text-end">
+                            <small class="text-muted">Server: 192.168.18.242:3000</small><br>
+                            <small class="text-muted" id="connectionStatus">Connecting...</small>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="d-flex align-items-center">
+                                    <span class="status-indicator" id="deviceStatusIndicator"></span>
+                                    <div>
+                                        <h5 id="deviceStatusText">Device: Disconnected</h5>
+                                        <small id="deviceInfo">IP: -- | MAC: --</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <h3 id="patientCount">0</h3>
+                                    <small>Active Patients</small>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <h3 id="alarmCount">0</h3>
+                                    <small>Emergencies Today</small>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <h3 id="responseTime">--</h3>
+                                    <small>Avg Response Time</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="row mb-4">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="bi bi-sliders"></i> System Controls</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <button class="btn btn-alarm w-100" onclick="triggerTestAlarm()">
+                                    <i class="bi bi-bell-fill"></i> TEST ALARM
+                                </button>
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-stop w-100" onclick="stopAlarm()" id="stopBtn" disabled>
+                                    <i class="bi bi-volume-mute"></i> STOP ALARM
+                                </button>
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-outline-light w-100" onclick="refreshData()">
+                                    <i class="bi bi-arrow-clockwise"></i> REFRESH
+                                </button>
+                            </div>
+                            <div class="col-md-6">
+                                <button class="btn btn-outline-warning w-100" onclick="simulateESP8266()">
+                                    <i class="bi bi-microwave"></i> SIMULATE ESP8266
+                                </button>
+                            </div>
+                            <div class="col-md-6">
+                                <button class="btn btn-outline-danger w-100" onclick="clearAllData()">
+                                    <i class="bi bi-trash"></i> CLEAR ALL DATA
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="bi bi-info-circle"></i> Instructions</h5>
+                    </div>
+                    <div class="card-body">
+                        <ol class="small">
+                            <li>Press button on ESP8266/CH341SER to trigger emergency</li>
+                            <li>Alarm sound will play from <code>alarm.mav</code> file</li>
+                            <li>All patients will be marked EMERGENCY</li>
+                            <li>Dashboard will show real-time status</li>
+                            <li>Acknowledge alarm to silence sound</li>
+                        </ol>
+                        <div class="alert alert-info mt-3 mb-0">
+                            <i class="bi bi-lightbulb"></i> 
+                            <strong>Tip:</strong> Check console (F12) for detailed logs
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Patient Data -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0"><i class="bi bi-people"></i> Patient Monitoring</h5>
+                        <div>
+                            <span class="badge bg-info me-2" id="lastUpdate">Last: --</span>
+                            <span class="badge bg-secondary">Auto-refresh: <span id="refreshTimer">5</span>s</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-dark table-hover" id="patientTable">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Patient Name</th>
+                                        <th>Room</th>
+                                        <th>Bed</th>
+                                        <th>Status</th>
+                                        <th>Time</th>
+                                        <th>Responded By</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="patientTableBody">
+                                    <tr>
+                                        <td colspan="7" class="text-center py-5">
+                                            <i class="bi bi-inbox display-6 text-muted"></i>
+                                            <h5 class="mt-3">No Patient Data</h5>
+                                            <p>Press ESP8266 button or simulate to add data</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- System Status -->
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="bi bi-server"></i> System Status</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-6">
+                                <p><strong>Alarm Sound:</strong><br>
+                                <span id="soundFileStatus" class="badge bg-danger">Checking...</span></p>
+                            </div>
+                            <div class="col-6">
+                                <p><strong>WebSocket:</strong><br>
+                                <span id="wsStatus" class="badge bg-warning">Connecting...</span></p>
+                            </div>
+                            <div class="col-6">
+                                <p><strong>Server Uptime:</strong><br>
+                                <span id="serverUptime">--</span></p>
+                            </div>
+                            <div class="col-6">
+                                <p><strong>Memory Usage:</strong><br>
+                                <span id="memoryUsage">--</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="bi bi-file-earmark-music"></i> Sound Files</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="soundFilesList">
+                            <div class="spinner-border spinner-border-sm text-light" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            Loading sound files...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>

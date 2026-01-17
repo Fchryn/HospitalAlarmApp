@@ -1,0 +1,134 @@
+[2025-12-25T03:52:34.077Z] [INFO] 
+╔══════════════════════════════════════════════════════════╗
+║     🚨 HOSPITAL EMERGENCY ALARM SYSTEM v1.0 🚨         ║
+║                                                          ║
+║  Server: http://192.168.18.242:3000                  ║
+║  Dashboard: http://192.168.18.242:3000               ║
+║  Test Page: http://192.168.18.242:3000/test          ║
+║  API Status: http://192.168.18.242:3000/api/status   ║
+║                                                          ║
+║  WebSocket: ws://192.168.18.242:3000                 ║
+║  Data Directory: C:\HospitalAlarmApp\data                            ║
+║  Sounds Directory: C:\HospitalAlarmApp\sounds                        ║
+║                                                          ║
+║  Press Ctrl+C to stop server                            ║
+╚══════════════════════════════════════════════════════════╝
+    
+[2025-12-25T03:52:34.082Z] [WARN] Alarm file missing: alarm.mav
+[2025-12-25T03:52:34.083Z] [WARN] Alarm file missing: emergency.wav
+[2025-12-25T03:52:34.083Z] [WARN] Alarm file missing: beep.mp3
+[2025-12-25T03:52:34.084Z] [WARN] Emergency alarm file (alarm.mav) not found!
+[2025-12-25T03:52:34.085Z] [WARN] Creating default alarm sounds...
+[2025-12-25T03:53:00.745Z] [INFO] 
+╔══════════════════════════════════════════════════════════╗
+║     🚨 HOSPITAL EMERGENCY ALARM SYSTEM v1.0 🚨         ║
+║                                                          ║
+║  Server: http://192.168.18.242:3000                  ║
+║  Dashboard: http://192.168.18.242:3000               ║
+║  Test Page: http://192.168.18.242:3000/test          ║
+║  API Status: http://192.168.18.242:3000/api/status   ║
+║                                                          ║
+║  WebSocket: ws://192.168.18.242:3000                 ║
+║  Data Directory: C:\HospitalAlarmApp\data                            ║
+║  Sounds Directory: C:\HospitalAlarmApp\sounds                        ║
+║                                                          ║
+║  Press Ctrl+C to stop server                            ║
+╚══════════════════════════════════════════════════════════╝
+    
+[2025-12-25T03:53:00.749Z] [WARN] Alarm file missing: alarm.mav
+[2025-12-25T03:53:00.750Z] [WARN] Alarm file missing: emergency.wav
+[2025-12-25T03:53:00.751Z] [WARN] Alarm file missing: beep.mp3
+[2025-12-25T03:53:00.751Z] [WARN] Emergency alarm file (alarm.mav) not found!
+[2025-12-25T03:53:00.752Z] [WARN] Creating default alarm sounds...
+[2025-12-25T03:53:01.023Z] [INFO] Default alarm sounds created
+[2025-12-25T03:53:36.908Z] [INFO] Testing alarm system...
+[2025-12-25T03:53:36.932Z] [ALARM] 🚨 ALARM TRIGGERED by system_test (test)
+[2025-12-25T03:53:36.935Z] [WARN] Creating default alarm sounds...
+[2025-12-25T03:53:36.945Z] [INFO] Data saved successfully
+[2025-12-25T03:53:37.182Z] [INFO] Default alarm sounds created
+[2025-12-25T03:53:40.352Z] [INFO] Testing alarm system...
+[2025-12-25T03:53:40.353Z] [WARN] Alarm already active, ignoring duplicate trigger
+[2025-12-25T03:53:43.070Z] [INFO] Testing alarm system...
+[2025-12-25T03:53:43.070Z] [WARN] Alarm already active, ignoring duplicate trigger
+[2025-12-25T03:53:43.274Z] [INFO] Testing alarm system...
+[2025-12-25T03:53:43.275Z] [WARN] Alarm already active, ignoring duplicate trigger
+[2025-12-25T03:53:43.430Z] [INFO] Testing alarm system...
+[2025-12-25T03:53:43.431Z] [WARN] Alarm already active, ignoring duplicate trigger
+[2025-12-25T03:53:43.654Z] [INFO] Testing alarm system...
+[2025-12-25T03:53:43.656Z] [WARN] Alarm already active, ignoring duplicate trigger
+[2025-12-25T03:53:46.950Z] [INFO] Alarm stopped by auto_timeout
+[2025-12-25T03:53:46.955Z] [INFO] Data saved successfully
+[2025-12-25T03:53:47.377Z] [INFO] Testing alarm system...
+[2025-12-25T03:53:47.379Z] [ALARM] 🚨 ALARM TRIGGERED by system_test (test)
+[2025-12-25T03:53:47.383Z] [WARN] Creating default alarm sounds...
+[2025-12-25T03:53:47.402Z] [INFO] Data saved successfully
+[2025-12-25T03:53:47.639Z] [INFO] Default alarm sounds created
+[2025-12-25T03:53:48.150Z] [INFO] Received data from device: ESP8266-TEST
+[2025-12-25T03:53:48.151Z] [ALARM] Emergency button pressed on device!
+[2025-12-25T03:53:48.152Z] [WARN] Alarm already active, ignoring duplicate trigger
+[2025-12-25T03:53:48.155Z] [INFO] Data saved successfully
+[2025-12-25T03:53:53.655Z] [INFO] Testing alarm system...
+[2025-12-25T03:53:53.656Z] [WARN] Alarm already active, ignoring duplicate trigger
+[2025-12-25T03:53:57.403Z] [INFO] Alarm stopped by auto_timeout
+[2025-12-25T03:53:57.407Z] [INFO] Data saved successfully
+[2025-12-25T03:54:23.042Z] [INFO] Testing alarm system...
+[2025-12-25T03:54:23.043Z] [ALARM] 🚨 ALARM TRIGGERED by system_test (test)
+[2025-12-25T03:54:23.044Z] [WARN] Creating default alarm sounds...
+[2025-12-25T03:54:23.053Z] [INFO] Data saved successfully
+[2025-12-25T03:54:23.267Z] [INFO] Default alarm sounds created
+[2025-12-25T03:54:33.052Z] [INFO] Alarm stopped by auto_timeout
+[2025-12-25T03:54:33.055Z] [INFO] Data saved successfully
+[2025-12-25T03:55:16.212Z] [INFO] Testing alarm system...
+[2025-12-25T03:55:16.214Z] [ALARM] 🚨 ALARM TRIGGERED by system_test (test)
+[2025-12-25T03:55:16.216Z] [ALARM] Playing alarm sound: beep.mp3
+[2025-12-25T03:55:16.242Z] [INFO] Data saved successfully
+[2025-12-25T03:55:26.245Z] [INFO] Alarm stopped by auto_timeout
+[2025-12-25T03:55:26.250Z] [INFO] Data saved successfully
+[2025-12-25T03:55:44.285Z] [INFO] Testing alarm system...
+[2025-12-25T03:55:44.286Z] [ALARM] 🚨 ALARM TRIGGERED by system_test (test)
+[2025-12-25T03:55:44.287Z] [ALARM] Playing alarm sound: beep.mp3
+[2025-12-25T03:55:44.296Z] [INFO] Data saved successfully
+[2025-12-25T03:55:54.304Z] [INFO] Alarm stopped by auto_timeout
+[2025-12-25T03:55:54.306Z] [INFO] Data saved successfully
+[2025-12-25T03:56:00.745Z] [INFO] Testing alarm system...
+[2025-12-25T03:56:00.746Z] [ALARM] 🚨 ALARM TRIGGERED by system_test (test)
+[2025-12-25T03:56:00.747Z] [ALARM] Playing alarm sound: beep.mp3
+[2025-12-25T03:56:00.756Z] [INFO] Data saved successfully
+[2025-12-25T03:56:05.119Z] [INFO] Testing alarm system...
+[2025-12-25T03:56:05.120Z] [WARN] Alarm already active, ignoring duplicate trigger
+[2025-12-25T03:56:10.765Z] [INFO] Alarm stopped by auto_timeout
+[2025-12-25T03:56:10.767Z] [INFO] Data saved successfully
+[2025-12-28T13:16:14.606Z] [INFO] Data loaded from file
+[2025-12-28T13:16:14.682Z] [INFO] 
+╔══════════════════════════════════════════════════════════╗
+║     🚨 HOSPITAL EMERGENCY ALARM SYSTEM v1.0 🚨         ║
+║                                                          ║
+║  Server: http://192.168.18.242:3000                  ║
+║  Dashboard: http://192.168.18.242:3000               ║
+║  Test Page: http://192.168.18.242:3000/test          ║
+║  API Status: http://192.168.18.242:3000/api/status   ║
+║                                                          ║
+║  WebSocket: ws://192.168.18.242:3000                 ║
+║  Data Directory: C:\HospitalAlarmApp\data                            ║
+║  Sounds Directory: C:\HospitalAlarmApp\sounds                        ║
+║                                                          ║
+║  Press Ctrl+C to stop server                            ║
+╚══════════════════════════════════════════════════════════╝
+    
+[2025-12-28T13:16:14.686Z] [WARN] Alarm file missing: alarm.mav
+[2025-12-28T13:16:14.688Z] [WARN] Alarm file missing: emergency.wav
+[2025-12-28T13:16:14.690Z] [WARN] Emergency alarm file (alarm.mav) not found!
+[2025-12-28T13:16:14.691Z] [WARN] Creating default alarm sounds...
+[2025-12-28T13:16:15.637Z] [INFO] Default alarm sounds created
+[2025-12-28T13:21:14.622Z] [INFO] Data saved successfully
+[2025-12-28T13:26:14.624Z] [INFO] Data saved successfully
+[2025-12-28T13:31:14.628Z] [INFO] Data saved successfully
+[2025-12-28T13:36:14.632Z] [INFO] Data saved successfully
+[2025-12-28T13:41:14.635Z] [INFO] Data saved successfully
+[2025-12-28T13:46:14.646Z] [INFO] Data saved successfully
+[2025-12-28T13:51:14.651Z] [INFO] Data saved successfully
+[2025-12-28T13:56:14.659Z] [INFO] Data saved successfully
+[2025-12-28T14:01:14.664Z] [INFO] Data saved successfully
+[2025-12-28T14:06:14.681Z] [INFO] Data saved successfully
+[2025-12-28T14:06:52.261Z] [INFO] Shutting down server...
+[2025-12-28T14:06:52.267Z] [INFO] Data saved successfully

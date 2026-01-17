@@ -1,0 +1,4 @@
+[2025-12-29 19:29:41] EMERGENCY - Patient: Melpa, Room: Room 001, Device: WATCH_29D295
+[2025-12-29 19:31:52] EMERGENCY - Patient: Melpa, Room: Room 001, Device: WATCH_29D295
+[2025-12-29 19:34:29] EMERGENCY - Patient: Melpa, Room: Room 001, Device: WATCH_29D295
+[2025-12-29 19:34:37] EMERGENCY - Patient: Melpa, Room: Room 001, Device: WATCH_29D295
