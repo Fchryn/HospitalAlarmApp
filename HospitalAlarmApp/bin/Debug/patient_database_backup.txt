@@ -1,0 +1,4 @@
+DeviceID,MACAddress,IPAddress,PatientName,Room Number,Bed Number,Last Activity,Status,Emergency
+,BC:FF:4D:29:D2:95,192.168.18.251,,,,2026-01-19 17:10:32,READY,
+,3C:E9:0E:E0:8A:CE,192.168.18.8,,,,2026-01-19 17:10:32,READY,
+,84:F3:EB:75:60:8C,192.168.18.36,,,,2026-01-20 16:35:56,DISCONNECTED,

@@ -7,16 +7,24 @@
       "RelativeMoniker": "D:0:0:{BBF6565B-FDCD-4476-A91D-74614FAFDCC1}|HospitalAlarmApp\\HospitalAlarmApp.csproj|solutionrelative:hospitalalarmapp\\patientdataform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BBF6565B-FDCD-4476-A91D-74614FAFDCC1}|HospitalAlarmApp\\HospitalAlarmApp.csproj|C:\\Referensi-Code\\HospitalAlarmApp\\hospitalalarmapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BBF6565B-FDCD-4476-A91D-74614FAFDCC1}|HospitalAlarmApp\\HospitalAlarmApp.csproj|solutionrelative:hospitalalarmapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BBF6565B-FDCD-4476-A91D-74614FAFDCC1}|HospitalAlarmApp\\HospitalAlarmApp.csproj|C:\\Referensi-Code\\HospitalAlarmApp\\hospitalalarmapp\\mysqlsyncservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BBF6565B-FDCD-4476-A91D-74614FAFDCC1}|HospitalAlarmApp\\HospitalAlarmApp.csproj|solutionrelative:hospitalalarmapp\\mysqlsyncservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BBF6565B-FDCD-4476-A91D-74614FAFDCC1}|HospitalAlarmApp\\HospitalAlarmApp.csproj|C:\\Referensi-Code\\HospitalAlarmApp\\hospitalalarmapp\\patientdataform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BBF6565B-FDCD-4476-A91D-74614FAFDCC1}|HospitalAlarmApp\\HospitalAlarmApp.csproj|solutionrelative:hospitalalarmapp\\patientdataform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{BBF6565B-FDCD-4476-A91D-74614FAFDCC1}|HospitalAlarmApp\\HospitalAlarmApp.csproj|C:\\Referensi-Code\\HospitalAlarmApp\\hospitalalarmapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BBF6565B-FDCD-4476-A91D-74614FAFDCC1}|HospitalAlarmApp\\HospitalAlarmApp.csproj|solutionrelative:hospitalalarmapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{BBF6565B-FDCD-4476-A91D-74614FAFDCC1}|HospitalAlarmApp\\HospitalAlarmApp.csproj|C:\\Referensi-Code\\HospitalAlarmApp\\hospitalalarmapp\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
       "RelativeMoniker": "D:0:0:{BBF6565B-FDCD-4476-A91D-74614FAFDCC1}|HospitalAlarmApp\\HospitalAlarmApp.csproj|solutionrelative:hospitalalarmapp\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BBF6565B-FDCD-4476-A91D-74614FAFDCC1}|HospitalAlarmApp\\HospitalAlarmApp.csproj|C:\\Referensi-Code\\HospitalAlarmApp\\hospitalalarmapp\\patientdataform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{BBF6565B-FDCD-4476-A91D-74614FAFDCC1}|HospitalAlarmApp\\HospitalAlarmApp.csproj|solutionrelative:hospitalalarmapp\\patientdataform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -36,20 +44,20 @@
               "RelativeDocumentMoniker": "HospitalAlarmApp\\PatientDataForm.cs",
               "ToolTip": "C:\\Referensi-Code\\HospitalAlarmApp\\HospitalAlarmApp\\PatientDataForm.cs",
               "RelativeToolTip": "HospitalAlarmApp\\PatientDataForm.cs",
-              "ViewState": "AgIAAJwHAAAAAAAAAAAuwPEEAAA1AAAAAAAAAA==",
+              "ViewState": "AgIAAIAAAAAAAAAAAAAYwJ0AAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-15T23:52:38.289Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Referensi-Code\\HospitalAlarmApp\\HospitalAlarmApp\\Program.cs",
               "RelativeDocumentMoniker": "HospitalAlarmApp\\Program.cs",
               "ToolTip": "C:\\Referensi-Code\\HospitalAlarmApp\\HospitalAlarmApp\\Program.cs",
               "RelativeToolTip": "HospitalAlarmApp\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAowBIAAAAiAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-06T08:37:10.452Z"
             },
@@ -61,21 +69,44 @@
               "RelativeDocumentMoniker": "HospitalAlarmApp\\PatientDataForm.Designer.cs",
               "ToolTip": "C:\\Referensi-Code\\HospitalAlarmApp\\HospitalAlarmApp\\PatientDataForm.Designer.cs",
               "RelativeToolTip": "HospitalAlarmApp\\PatientDataForm.Designer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAQwAsAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-16T00:18:35.803Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
+              "Title": "MySQLSyncService.cs",
+              "DocumentMoniker": "C:\\Referensi-Code\\HospitalAlarmApp\\HospitalAlarmApp\\MySQLSyncService.cs",
+              "RelativeDocumentMoniker": "HospitalAlarmApp\\MySQLSyncService.cs",
+              "ToolTip": "C:\\Referensi-Code\\HospitalAlarmApp\\HospitalAlarmApp\\MySQLSyncService.cs",
+              "RelativeToolTip": "HospitalAlarmApp\\MySQLSyncService.cs",
+              "ViewState": "AgIAADkAAAAAAAAAAAAAADoAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-22T03:37:10.94Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "App.config",
               "DocumentMoniker": "C:\\Referensi-Code\\HospitalAlarmApp\\HospitalAlarmApp\\App.config",
               "RelativeDocumentMoniker": "HospitalAlarmApp\\App.config",
               "ToolTip": "C:\\Referensi-Code\\HospitalAlarmApp\\HospitalAlarmApp\\App.config",
               "RelativeToolTip": "HospitalAlarmApp\\App.config",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAZAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAQwCkAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
               "WhenOpened": "2026-01-01T10:00:40.799Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "PatientDataForm.cs [Design]",
+              "DocumentMoniker": "C:\\Referensi-Code\\HospitalAlarmApp\\HospitalAlarmApp\\PatientDataForm.cs",
+              "RelativeDocumentMoniker": "HospitalAlarmApp\\PatientDataForm.cs",
+              "ToolTip": "C:\\Referensi-Code\\HospitalAlarmApp\\HospitalAlarmApp\\PatientDataForm.cs [Design]",
+              "RelativeToolTip": "HospitalAlarmApp\\PatientDataForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-19T07:57:52.583Z"
             }
           ]
         }

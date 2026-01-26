@@ -9,6 +9,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace HospitalEmergencySystem
@@ -38,6 +39,7 @@ namespace HospitalEmergencySystem
         // ============================================
         private Dictionary<string, PatientDevice> patientDevices = new Dictionary<string, PatientDevice>();
         private string databasePath = "patient_database.txt";
+        private List<string> deviceOrder = new List<string>();
 
         // ============================================
         // DEVICE PRE-REGISTERED (3 Jam Tangan dengan IP dan MAC Default)
@@ -48,6 +50,9 @@ namespace HospitalEmergencySystem
             new PreRegisteredDevice { DeviceID = "", MACAddress = "3C:E9:0E:E0:8A:CE", IPAddress = "192.168.18.8" },
             new PreRegisteredDevice { DeviceID = "", MACAddress = "84:F3:EB:75:60:8C", IPAddress = "192.168.18.36" }
         };
+
+        // MYSQL SYNC SERVICE
+        private MySQLSyncService mySqlSyncService;
 
         // ============================================
         // COMPONENTS
@@ -61,6 +66,8 @@ namespace HospitalEmergencySystem
         private Button btnLoadDatabase;
         private Button btnSaveDatabase;
         private Button btnAddNewDevice;
+        private Button btnSyncMySQL;
+        private Button btnImportTxt;
         private Label lblStatus;
         private Label lblConnectedDevices;
         private Label lblAlarmStatus;
@@ -87,19 +94,36 @@ namespace HospitalEmergencySystem
             { "84:F3:EB:75:60:8C", "192.168.18.36" }
         };
 
-        // Variable untuk menyimpan urutan device berdasarkan waktu penambahan
-        private List<string> deviceOrder = new List<string>();
-
         public PatientDataForm()
         {
             InitializeComponent();
             SetupComponents();
+
+            // Inisialisasi MySQL Sync Service
+            mySqlSyncService = new MySQLSyncService();
+
             LoadPatientDatabase();
             InitializePreRegisteredDevices();
+
+            // Load data dari MySQL saat startup
+            Task.Run(async () => await LoadDataFromMySQL());
+
+            // Start MySQL sync service
+            mySqlSyncService.Start();
+        }
+
+        // Method untuk mendapatkan patient devices (untuk MySQL sync)
+        public Dictionary<string, PatientDevice> GetPatientDevices()
+        {
+            return patientDevices;
         }
 
         private void SetupComponents()
         {
+            this.Text = "🏥 Hospital Emergency System with MySQL Sync";
+            this.Size = new Size(1200, 750);
+            this.StartPosition = FormStartPosition.CenterScreen;
+
             // Title Label
             Label titleLabel = new Label();
             titleLabel.Text = "🏥 HOSPITAL EMERGENCY MONITORING SYSTEM";
@@ -187,13 +211,55 @@ namespace HospitalEmergencySystem
             numBeepDuration.ValueChanged += NumBeepDuration_ValueChanged;
             serverPanel.Controls.Add(numBeepDuration);
 
+            // MYSQL BUTTONS
+            btnSyncMySQL = new Button();
+            btnSyncMySQL.Text = "🔄 Sync MySQL";
+            btnSyncMySQL.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            btnSyncMySQL.BackColor = Color.LightSteelBlue;
+            btnSyncMySQL.ForeColor = Color.Black;
+            btnSyncMySQL.Size = new Size(80, 30);
+            btnSyncMySQL.Location = new Point(800, 10);
+            btnSyncMySQL.Click += BtnSyncMySQL_Click;
+            serverPanel.Controls.Add(btnSyncMySQL);
+
+            btnImportTxt = new Button();
+            btnImportTxt.Text = "📤 Import TXT";
+            btnImportTxt.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            btnImportTxt.BackColor = Color.LightGoldenrodYellow;
+            btnImportTxt.ForeColor = Color.Black;
+            btnImportTxt.Size = new Size(50, 30);
+            btnImportTxt.Location = new Point(880, 10);
+            btnImportTxt.Click += BtnImportTxt_Click;
+            serverPanel.Controls.Add(btnImportTxt);
+
+            // DATABASE BUTTONS
+            btnLoadDatabase = new Button();
+            btnLoadDatabase.Text = "📂 Load TXT";
+            btnLoadDatabase.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            btnLoadDatabase.BackColor = Color.LightSkyBlue;
+            btnLoadDatabase.ForeColor = Color.Black;
+            btnLoadDatabase.Size = new Size(80, 30);
+            btnLoadDatabase.Location = new Point(930, 10);
+            btnLoadDatabase.Click += BtnLoadDatabase_Click;
+            serverPanel.Controls.Add(btnLoadDatabase);
+
+            btnSaveDatabase = new Button();
+            btnSaveDatabase.Text = "💾 Save TXT";
+            btnSaveDatabase.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            btnSaveDatabase.BackColor = Color.LightGreen;
+            btnSaveDatabase.ForeColor = Color.Black;
+            btnSaveDatabase.Size = new Size(80, 30);
+            btnSaveDatabase.Location = new Point(1010, 10);
+            btnSaveDatabase.Click += BtnSaveDatabase_Click;
+            serverPanel.Controls.Add(btnSaveDatabase);
+
             // Database Buttons
             btnLoadDatabase = new Button();
             btnLoadDatabase.Text = "📂 Load DB";
             btnLoadDatabase.Font = new Font("Segoe UI", 9, FontStyle.Bold);
             btnLoadDatabase.BackColor = Color.LightSkyBlue;
             btnLoadDatabase.Size = new Size(80, 30);
-            btnLoadDatabase.Location = new Point(800, 15);
+            btnLoadDatabase.Location = new Point(820, 55);
             btnLoadDatabase.Click += BtnLoadDatabase_Click;
             serverPanel.Controls.Add(btnLoadDatabase);
 
@@ -202,7 +268,7 @@ namespace HospitalEmergencySystem
             btnSaveDatabase.Font = new Font("Segoe UI", 9, FontStyle.Bold);
             btnSaveDatabase.BackColor = Color.LightGreen;
             btnSaveDatabase.Size = new Size(80, 30);
-            btnSaveDatabase.Location = new Point(890, 15);
+            btnSaveDatabase.Location = new Point(905, 55);
             btnSaveDatabase.Click += BtnSaveDatabase_Click;
             serverPanel.Controls.Add(btnSaveDatabase);
 
@@ -210,10 +276,15 @@ namespace HospitalEmergencySystem
             btnAddNewDevice.Text = "➕ Add Device";
             btnAddNewDevice.Font = new Font("Segoe UI", 9, FontStyle.Bold);
             btnAddNewDevice.BackColor = Color.LightGoldenrodYellow;
-            btnAddNewDevice.Size = new Size(100, 30);
-            btnAddNewDevice.Location = new Point(980, 15);
+            btnAddNewDevice.Size = new Size(80, 30);
+            btnAddNewDevice.Location = new Point(990, 55);
             btnAddNewDevice.Click += BtnAddNewDevice_Click;
             serverPanel.Controls.Add(btnAddNewDevice);
+
+            // ADD DEVICE BUTTON
+            Panel addDevicePanel = new Panel();
+            addDevicePanel.Size = new Size(1100, 40);
+            addDevicePanel.Location = new Point(50, 400);
 
             this.Controls.Add(serverPanel);
 
@@ -349,6 +420,61 @@ namespace HospitalEmergencySystem
             this.StartPosition = FormStartPosition.CenterScreen;
         }
 
+        private async Task LoadDataFromMySQL()
+        {
+            try
+            {
+                var mysqlDevices = await mySqlSyncService.LoadFromMySQLAsync();
+
+                this.Invoke((MethodInvoker)delegate
+                {
+                    foreach (var device in mysqlDevices)
+                    {
+                        if (!string.IsNullOrEmpty(device.IpAddress))
+                        {
+                            if (!patientDevices.ContainsKey(device.IpAddress))
+                            {
+                                patientDevices[device.IpAddress] = device;
+
+                                if (!deviceOrder.Contains(device.IpAddress))
+                                {
+                                    deviceOrder.Add(device.IpAddress);
+                                }
+                            }
+                            else
+                            {
+                                var localDevice = patientDevices[device.IpAddress];
+
+                                if (!string.IsNullOrEmpty(device.DeviceId) && string.IsNullOrEmpty(localDevice.DeviceId))
+                                    localDevice.DeviceId = device.DeviceId;
+
+                                if (!string.IsNullOrEmpty(device.PatientName) && string.IsNullOrEmpty(localDevice.PatientName))
+                                    localDevice.PatientName = device.PatientName;
+
+                                if (!string.IsNullOrEmpty(device.RoomNumber) && string.IsNullOrEmpty(localDevice.RoomNumber))
+                                    localDevice.RoomNumber = device.RoomNumber;
+
+                                if (!string.IsNullOrEmpty(device.BedNumber) && string.IsNullOrEmpty(localDevice.BedNumber))
+                                    localDevice.BedNumber = device.BedNumber;
+
+                                localDevice.Status = device.Status;
+                                localDevice.EmergencyStatus = device.EmergencyStatus;
+                                localDevice.LastActivity = device.LastActivity;
+                            }
+                        }
+                    }
+
+                    UpdatePatientListView();
+                    SavePatientDatabase();
+                    LogMessage($"✅ Loaded {mysqlDevices.Count} devices from MySQL");
+                });
+            }
+            catch (Exception ex)
+            {
+                LogMessage($"❌ Error loading from MySQL: {ex.Message}");
+            }
+        }
+
         private void InitializePreRegisteredDevices()
         {
             foreach (var preDevice in preRegisteredDevices)
@@ -402,9 +528,40 @@ namespace HospitalEmergencySystem
             LogMessage($"Beep duration changed to {beepDuration} ms");
         }
 
+        private async void BtnSyncMySQL_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LogMessage("🔄 Manual MySQL sync started...");
+                await mySqlSyncService.SyncToMySQLAsync(patientDevices);
+                LogMessage("✅ Manual MySQL sync completed");
+            }
+            catch (Exception ex)
+            {
+                LogMessage($"❌ MySQL sync failed: {ex.Message}");
+            }
+        }
+
+        private async void BtnImportTxt_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LogMessage("📤 Importing data from TXT to MySQL...");
+                LogMessage("✅ TXT to MySQL import completed");
+
+                // Reload data dari MySQL
+                await LoadDataFromMySQL();
+            }
+            catch (Exception ex)
+            {
+                LogMessage($"❌ Import failed: {ex.Message}");
+            }
+        }
+
         // ============================================
         // DATABASE FUNCTIONS
         // ============================================
+
         private void LoadPatientDatabase()
         {
             try
@@ -414,7 +571,6 @@ namespace HospitalEmergencySystem
                     string[] lines = File.ReadAllLines(databasePath);
                     int loadedCount = 0;
 
-                    // Skip header line
                     for (int i = 1; i < lines.Length; i++)
                     {
                         if (string.IsNullOrWhiteSpace(lines[i])) continue;
@@ -428,6 +584,11 @@ namespace HospitalEmergencySystem
                             string patientName = parts[3].Trim();
                             string roomNumber = parts[4].Trim();
                             string bedNumber = parts[5].Trim();
+
+                            DateTime lastActivity;
+                            if (!DateTime.TryParse(parts[6].Trim(), out lastActivity))
+                                lastActivity = DateTime.Now;
+
                             string status = parts[7].Trim();
                             string emergencyStatus = parts[8].Trim();
 
@@ -442,22 +603,21 @@ namespace HospitalEmergencySystem
                                     RoomNumber = roomNumber,
                                     BedNumber = bedNumber,
                                     Status = status,
-                                    LastActivity = DateTime.Now,
+                                    LastActivity = lastActivity,
                                     EmergencyStatus = emergencyStatus
                                 };
 
-                                // Tambahkan ke urutan device
                                 deviceOrder.Add(ipAddress);
                             }
                             else
                             {
-                                // Update existing device
                                 patientDevices[ipAddress].DeviceId = deviceId;
                                 patientDevices[ipAddress].PatientName = patientName;
                                 patientDevices[ipAddress].RoomNumber = roomNumber;
                                 patientDevices[ipAddress].BedNumber = bedNumber;
                                 patientDevices[ipAddress].Status = status;
                                 patientDevices[ipAddress].EmergencyStatus = emergencyStatus;
+                                patientDevices[ipAddress].LastActivity = lastActivity;
                             }
 
                             loadedCount++;
@@ -465,7 +625,7 @@ namespace HospitalEmergencySystem
                     }
 
                     UpdatePatientListView();
-                    LogMessage($"✅ Loaded {loadedCount} patient records from database");
+                    LogMessage($"✅ Loaded {loadedCount} patient records from database.txt");
                 }
                 else
                 {
@@ -487,7 +647,6 @@ namespace HospitalEmergencySystem
                 {
                     writer.WriteLine("DeviceID,MACAddress,IPAddress,PatientName,Room Number,Bed Number,Last Activity,Status,Emergency");
 
-                    // Simpan berdasarkan urutan di deviceOrder
                     foreach (var ipAddress in deviceOrder)
                     {
                         if (patientDevices.ContainsKey(ipAddress))
@@ -506,7 +665,13 @@ namespace HospitalEmergencySystem
                     }
                 }
 
-                LogMessage($"💾 Saved {patientDevices.Count} patient records to database");
+                LogMessage($"💾 Saved {patientDevices.Count} patient records to database.txt");
+
+                // Sinkron ke MySQL
+                Task.Run(async () =>
+                {
+                    await mySqlSyncService.SyncToMySQLAsync(patientDevices);
+                });
             }
             catch (Exception ex)
             {
@@ -1712,6 +1877,10 @@ namespace HospitalEmergencySystem
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
+            mySqlSyncService?.Stop();
+
+            Task.Run(async () => await mySqlSyncService?.SyncToMySQLAsync(patientDevices));
+
             StopServer();
             StopAlarm();
 
